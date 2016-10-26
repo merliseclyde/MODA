@@ -9,7 +9,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# [MODA: An R package for Bayesian Variable Selection using Orthogonal Data Augmentation](https://github.com/merliseclyde/MODA)
+# [MODA: An R package for Bayesian Variable Selection using Modal Orthogonal Data Augmentation](https://github.com/merliseclyde/MODA)
 
 The Modal Orthogonal Data Augmentation Package or `MODA` finds posterior modes of the model space under generalized ridge shrinkage priors with a point mass at zero.  In addtion to finding modes, the algorithms provide an exploration of high posterior probability models.
 
