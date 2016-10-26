@@ -2,8 +2,8 @@ README
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[MODA: An R package for Bayesian Variable Selection using Orthogonal Data Augmentation](https://github.com/merliseclyde/MODA)
-=============================================================================================================================
+[MODA: An R package for Bayesian Variable Selection using Modal Orthogonal Data Augmentation](https://github.com/merliseclyde/MODA)
+===================================================================================================================================
 
 The Modal Orthogonal Data Augmentation Package or `MODA` finds posterior modes of the model space under generalized ridge shrinkage priors with a point mass at zero. In addtion to finding modes, the algorithms provide an exploration of high posterior probability models.
 
@@ -15,3 +15,5 @@ On the other hand, we welcome everyone to use the most recent version of the pac
 # library(devtools)
 # install_github("merliseclyde/MODA")
 ```
+
+You can check out the current build and test coverage status courtesy Travis CI: [![](https://travis-ci.org/merliseclyde/MODA.png?branch=master)](https://travis-ci.org/merliseclyde/MODA) before installing.
