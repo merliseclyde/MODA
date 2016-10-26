@@ -5,8 +5,11 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-")
 ```
 
 # [MODA: An R package for Bayesian Variable Selection using Modal Orthogonal Data Augmentation](https://github.com/merliseclyde/MODA)
@@ -25,8 +28,8 @@ use the `devtools` package from
 [CRAN](https://cran.r-project.org/package=devtools) and enter in `R`:
 
 ```{r}
-# library(devtools)
-# install_github("merliseclyde/MODA")
+ library(devtools)
+ devtools::install_github("merliseclyde/MODA")
 ```
 
 You can check out the current build and test coverage status courtesy Travis CI: [![](https://travis-ci.org/merliseclyde/MODA.png?branch=master)](https://travis-ci.org/merliseclyde/MODA) 
