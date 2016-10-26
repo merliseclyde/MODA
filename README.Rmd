@@ -27,9 +27,8 @@ development version from [GitHub](https://github.com/merliseclyde),
 use the `devtools` package from
 [CRAN](https://cran.r-project.org/package=devtools) and enter in `R`:
 
-```{r}
- library(devtools)
- devtools::install_github("merliseclyde/MODA")
+```r
+devtools::install_github('merliseclyde/MODA')
 ```
 
 You can check out the current build and test coverage status courtesy Travis CI: [![](https://travis-ci.org/merliseclyde/MODA.png?branch=master)](https://travis-ci.org/merliseclyde/MODA) 

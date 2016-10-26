@@ -12,8 +12,7 @@ Some CRAN statistics: [![](http://cranlogs.r-pkg.org/badges/MODA)](http://cran.r
 On the other hand, we welcome everyone to use the most recent version of the package with quick-fixes, new features and probably new bugs. It's currently hosted on [GitHub](https://github.com/merliseclyde/MODA). To get the latest development version from [GitHub](https://github.com/merliseclyde), use the `devtools` package from [CRAN](https://cran.r-project.org/package=devtools) and enter in `R`:
 
 ``` r
-# library(devtools)
-# install_github("merliseclyde/MODA")
+devtools::install_github('merliseclyde/MODA')
 ```
 
 You can check out the current build and test coverage status courtesy Travis CI: [![](https://travis-ci.org/merliseclyde/MODA.png?branch=master)](https://travis-ci.org/merliseclyde/MODA) before installing.
