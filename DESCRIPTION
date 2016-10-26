@@ -1,9 +1,16 @@
 Package: MODA
 Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.3.1)
-License: What license is it under?
+Version: 0.0.1
+Authors@R: c(person("Merlise", "Clyde", email = "clyde@duke.edu", role = c("aut", "cre")),
+             person("Michael", "Lindon", email = "msl33@duke.edu", role = c("aut")))
+Description: The Modal Orthogonal Data Augmentation Package or `MODA`
+    finds posterior modes of the model space under generalized ridge
+    shrinkage priors with a point mass at zero.  In addtion to finding
+    modes, the algorithms provide an exploration of high posterior
+    probability models.
+Depends:
+    R (>= 3.3.1)
+License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 5.0.1

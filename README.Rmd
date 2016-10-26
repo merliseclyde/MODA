@@ -29,5 +29,7 @@ use the `devtools` package from
 # install_github("merliseclyde/MODA")
 ```
 
+You can check out the current build and test coverage status courtesy Travis CI: [![](https://travis-ci.org/merliseclyde/MODA.png?branch=master)](https://travis-ci.org/merliseclyde/MODA) 
+before installing.
 
 
