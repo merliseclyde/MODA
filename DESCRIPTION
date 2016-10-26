@@ -8,9 +8,11 @@ Description: The Modal Orthogonal Data Augmentation Package or `MODA`
     shrinkage priors with a point mass at zero.  In addtion to finding
     modes, the algorithms provide an exploration of high posterior
     probability models.
-Depends:
-    R (>= 3.3.1)
-License: GPL-2 | GPL-3
+Depends: 
+    R (>= 3.3.1), stats, BAS, rscala
+Suggests: 
+    MASS
+License:  GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1

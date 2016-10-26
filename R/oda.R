@@ -1,8 +1,34 @@
+
+#' Title
+#'
+#' @param formula an object of class \code{\link{formula}} (or one that can be coerced to that class): a symbolic description of the model to be fitted.
+#' @param data an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model. If not found in data, the variables are taken from environment(formula), typically the environment from which lm is called.
+#' @param subset an optional vector specifying a subset of observations to be used in the fitting process.
+#' @param weights  an optional vector of weights to be used in the fitting process. Should be NULL or a numeric vector. If non-NULL, weighted least squares is used with weights weights (that is, minimizing sum(w*e^2)); otherwise ordinary least squares is used.
+#' @param na.action a function which indicates what should happen when the data contain NAs. The default is set by the na.action setting of options, and is na.fail if that is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL, no action. Value na.exclude can be useful.
+#' @param n.models  number of models to sample
+#' @param betaprior  prior on coefficients
+#' @param modelprior  prior on the model space
+#' @param method  the method to be used
+#' @param force.in variables that shoujld always be included
+#' @param iterations  number of iterations
+#'
+#' @return None yet
+#' @importFrom stats contrasts model.matrix model.response model.weights weighted.mean
+#' @importFrom BAS beta.binomial uniform
+#' @export
+#' @references Clyde, MA, & Ghosh, J. (2012). Finite population estimators in stochastic search variable selection. Biometrika, 99 (4), 981-988. <10.1093/biomet/ass040>
+#' @details  add more here
+#' @examples
+#' library(MASS)
+#' data(UScrime)
+#' oda.lm(y ~ ., data=UScrime)
+#'
 oda.lm = function(formula, data,  subset, weights,
                   na.action="na.omit",
-                  n.models=NULL,  prior=GDP(),
+                  n.models=NULL,  betaprior=GDP(),
                   modelprior=beta.binomial(1,1),
-                  method="coordinate-asscent", update=NULL,
+                  method="coordinate-ascent",
                   force.in,
                   iterations=NULL
                   )  {
@@ -51,86 +77,15 @@ oda.lm = function(formula, data,  subset, weights,
 
  # Modify below to call scala
     result = switch(method,
-                  "BAS" = .Call("sampleworep",
-                                Yvec, X, sqrt(weights),
-                                prob, modeldim,
-                                incint=as.integer(int),
-                                alpha= as.numeric(alpha),
-                                method=as.integer(method.num), modelprior=modelprior,
-                                update=as.integer(update),
-                                Rbestmodel=as.integer(bestmodel),
-                                plocal=as.numeric(prob.local),
-                                PACKAGE="BAS"),
-                  "MCMC+BAS"= .Call("mcmcbas",
-                                    Yvec, X, sqrt(weights),
-                                    prob, modeldim,
-                                    incint=as.integer(int),
-                                    alpha= as.numeric(alpha),
-                                    method=as.integer(method.num), modelprior=modelprior,
-                                    update=as.integer(update),
-                                    Rbestmodel=as.integer(bestmodel),
-                                    plocal=as.numeric(1.0 - prob.rw), as.integer(Burnin.iterations),
-                                    as.integer(MCMC.iterations), as.numeric(lambda),as.numeric(delta),
-                                    PACKAGE="BAS"),
-                  "MCMC"= .Call("mcmc_new",
-                                Yvec, X, sqrt(weights),
-                                prob, modeldim,
-                                incint=as.integer(int),
-                                alpha= as.numeric(alpha),
-                                method=as.integer(method.num), modelprior=modelprior,
-                                update=as.integer(update),
-                                Rbestmodel=as.integer(bestmodel),
-                                plocal=as.numeric(1.0 - prob.rw), as.integer(Burnin.iterations),
-                                as.integer(MCMC.iterations), as.numeric(lambda),as.numeric(delta),
-                                as.integer(thin),
-                                PACKAGE="BAS"),
-                  "MCMC_old"= .Call("mcmc",
-                                    Yvec, X, sqrt(weights),
-                                    prob, modeldim,
-                                    incint=as.integer(int),
-                                    alpha= as.numeric(alpha),
-                                    method=as.integer(method.num), modelprior=modelprior,
-                                    update=as.integer(update),
-                                    Rbestmodel=as.integer(bestmodel),
-                                    plocal=as.numeric(1.0 - prob.rw), as.integer(Burnin.iterations),
-                                    as.integer(MCMC.iterations), as.numeric(lambda),as.numeric(delta),
-                                    as.integer(thin),
-                                    PACKAGE="BAS"),
-                  "AMCMC" = .Call("amcmc",
-                                  Yvec, X, sqrt(weights),
-                                  prob, modeldim,
-                                  incint=as.integer(int),
-                                  alpha= as.numeric(alpha),
-                                  method=as.integer(method.num), modelprior=modelprior,
-                                  update=as.integer(update),
-                                  Rbestmodel=as.integer(bestmodel),
-                                  plocal=as.numeric(1.0-prob.rw), as.integer(Burnin.iterations),
-                                  as.integer(MCMC.iterations), as.numeric(lambda),as.numeric(delta),
-                                  PACKAGE="BAS"),
-                  #    "MAXeffect" = .Call("posisearch",
-                  #     Yvec, X,
-                  #     prob, modeldim,
-                  #     incint=as.integer(int),
-                  #     alpha= as.numeric(alpha),
-                  #     method=as.integer(method.num), modelprior=modelprior,
-                  #     update=as.integer(update),
-                  #     Rbestmodel=as.integer(bestmodel),
-                  #     Rbestmarg=as.numeric(bestmarg),
-                  #     plocal=as.numeric(1.0-prob.rw), as.integer(Burnin.iterations),
-                  #     as.integer(MCMC.iterations), as.numeric(lambda),as.numeric(delta),
-                  #     PACKAGE="BAS"),
-                  "deterministic" = .Call("deterministic",
-                                          Yvec, X, sqrt(weights),
-                                          prob, modeldim,
-                                          incint=as.integer(int),
-                                          alpha= as.numeric(alpha),
-                                          method=as.integer(method.num),modelprior=modelprior,
-                                          PACKAGE="BAS")
+                  "coordinate-ascent" = rscala(),
+                  "oda"= rscala(),
+                  "enumerate"= rscala(),
+                  "adapt"= rscala()
   )
 
   result$namesx=namesx
-  result$n=length(Yvec)
-  result$prior=prior
+  result$n=n
+  result$betaprior=betaprior
   result$modelprior=modelprior
   result$call=call
 
